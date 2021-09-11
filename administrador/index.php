@@ -1,13 +1,21 @@
 <?php
+session_start();
 if ($_POST) {
-    header('Location:inicio.php');
+    if(($_POST['usuario']=="dfmolanon")&&($_POST['contrasenia']=="sistema")){
+        $_SESSION['usuario']="ok";
+        $_SESSION['nombreUsuario']="dfmolanon";
+        header('Location:inicio.php'); 
+    }else{
+        $mensaje="Error: El usuario o contraseña son incorrectos";
+    }
+
 }
 ?>
 
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>Administrador</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -26,6 +34,12 @@ if ($_POST) {
                             Login
                         </div>
                         <div class="card-body">
+                            <?php if(isset($mensaje)){ ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo $mensaje;?>
+                                </div>
+                            <?php }?>    
+                            
                             <form method="POST">
 
                             <div class = "form-group">
